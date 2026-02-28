@@ -1,0 +1,33 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 d9659866
+dn: olcDatabase={1}mdb
+objectClass: olcDatabaseConfig
+objectClass: olcMdbConfig
+olcDatabase: {1}mdb
+olcDbDirectory: /var/lib/ldap
+olcSuffix: dc=asirproyecto26,dc=duckdns,dc=org
+olcLastMod: TRUE
+olcRootDN: cn=admin,dc=asirproyecto26,dc=duckdns,dc=org
+olcDbCheckpoint: 512 30
+olcDbMaxSize: 1073741824
+structuralObjectClass: olcMdbConfig
+entryUUID: ec898ca8-a51e-1040-9fca-3d69a8b30808
+creatorsName: cn=admin,cn=config
+createTimestamp: 20260223161742Z
+olcAccess: {0}to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=extern
+ al,cn=auth manage by * break
+olcAccess: {1}to attrs=userPassword,shadowLastChange by self write by dn="cn
+ =admin,dc=asirproyecto26,dc=duckdns,dc=org" write by anonymous auth by * no
+ ne
+olcAccess: {2}to * by self read by dn="cn=admin,dc=asirproyecto26,dc=duckdns
+ ,dc=org" write by * none
+olcDbIndex: uid eq
+olcDbIndex: mail eq
+olcDbIndex: memberOf eq
+olcDbIndex: entryCSN eq
+olcDbIndex: entryUUID eq
+olcDbIndex: objectClass eq
+olcRootPW:: e1NTSEF9U2Y4aXFqdUY3VzlVakt1ZjVsME11M0hvblBPbHRTdEY=
+entryCSN: 20260225175847.763100Z#000000#000#000000
+modifiersName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+modifyTimestamp: 20260225175847Z
