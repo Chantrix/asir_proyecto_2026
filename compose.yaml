@@ -6,9 +6,9 @@ services:
     container_name: duckdns
     network_mode: host # Para que detecte bien la IP externa
     environment:
-      - SUBDOMAINS=asirproyecto26
-      - TOKEN=TU_TOKEN_AQUÍ
-      - LOG_FILE=false
+      SUBDOMAINS: ${MI_SUBDOMINIO}
+      TOKEN: ${DUCKDNS_TOKEN}
+      LOG_FILE: false
     restart: unless-stopped
   # EL PROXY Nginx Proxy Manager
   proxy:
@@ -89,6 +89,19 @@ services:
     networks:
       - red-privada
       - red-publica # Necesita pública para que el Proxy llegue a él
+
+  wazuh-agent:
+    image: wazuh/wazuh-agent:4.14.3
+    container_name: wazuh-agente-asir
+    environment:
+      - WAZUH_MANAGER=wazuh-manager # Gracias a la red externa, lo encontrará por nombre
+    volumes:
+      - ./nextcloud_data/data/nextcloud.log:/var/log/nextcloud/nextcloud.log:ro
+    networks:
+      - red-seguridad # <--- Conexión al SIEM
+      - red-privada   # <--- Conexión a Nextcloud
+    depends_on:
+      - nextcloud
 # REDES
 networks:
   red-publica:
@@ -96,3 +109,5 @@ networks:
   red-privada:
     driver: bridge
     internal: true
+  red-seguridad:
+    external: true
