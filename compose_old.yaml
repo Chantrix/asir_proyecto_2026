@@ -1,29 +1,32 @@
 services:
+#este contenedor soluciona el cambio de ip publica
+#cuando se reinicia el router por ejemplo
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
     container_name: duckdns
-    network_mode: host
+    network_mode: host # Para que detecte bien la IP externa
     environment:
       SUBDOMAINS: ${MI_SUBDOMINIO}
       TOKEN: ${DUCKDNS_TOKEN}
-      LOG_FILE: "false"
+      LOG_FILE: false
     restart: unless-stopped
-
+  # EL PROXY Nginx Proxy Manager
   proxy:
     image: jc21/nginx-proxy-manager:latest
     container_name: nginx-proxy-asir
     restart: always
     ports:
-      - "80:80"
-      - "4443:443"
-      - "81:81"
+      - "80:80"    # HTTP para renovar certificados
+      - "4443:443"  # HTTPS LDAPS y Nextcloud
+      - "81:81"    # administración del Proxy
     volumes:
-      - npm_data:/data
-      - npm_letsencrypt:/etc/letsencrypt
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
     networks:
       - red-publica
       - red-privada
 
+  # OPENLDAP
   ldap:
     image: osixia/openldap:latest
     container_name: ldap-servidor
@@ -37,9 +40,10 @@ services:
     networks:
       - red-privada
     volumes:
-      - ldap_var:/var/lib/ldap
-      - ldap_etc:/etc/ldap/slapd.d
+      - ./ldap/var:/var/lib/ldap
+      - ./ldap/etc:/etc/ldap/slapd.d
 
+  # PHP PARA GESTIONAR LDAP
   phpldapadmin:
     image: osixia/phpldapadmin:latest
     container_name: phpldapadmin
@@ -52,7 +56,7 @@ services:
       - red-publica
     depends_on:
       - ldap
-
+# BASE DE DATOS NEXTCLOUD
   db-nextcloud:
     image: mariadb:10.6
     container_name: nextcloud-db
@@ -63,10 +67,11 @@ services:
       MYSQL_USER: "${NC_DB_USER}"
       MYSQL_PASSWORD: "${NC_DB_PASS}"
     volumes:
-      - nextcloud_db:/var/lib/mysql
+      - ./nextcloud_db:/var/lib/mysql
     networks:
       - red-privada
 
+  # NEXTCLOUD
   nextcloud:
     image: nextcloud:latest
     container_name: nextcloud-asir
@@ -80,34 +85,24 @@ services:
       MYSQL_USER: "${NC_DB_USER}"
       MYSQL_PASSWORD: "${NC_DB_PASS}"
     volumes:
-      - nextcloud_data:/var/www/html
+      - ./nextcloud_data:/var/www/html
     networks:
       - red-privada
-      - red-publica
+      - red-publica # Necesita pública para que el Proxy llegue a él
 
   wazuh-agent:
     image: wazuh/wazuh-agent:4.14.3
     container_name: wazuh-agente-asir
     environment:
-      - WAZUH_MANAGER=wazuh-manager
+      - WAZUH_MANAGER=wazuh-manager # Gracias a la red externa, lo encontrará por nombre
     volumes:
-      # Mantenemos este como ruta relativa para que el agente lea el log local si existe
       - ./nextcloud_data/data/nextcloud.log:/var/log/nextcloud/nextcloud.log:ro
     networks:
-      - red-seguridad
-      - red-privada
+      - red-seguridad # <--- Conexión al SIEM
+      - red-privada   # <--- Conexión a Nextcloud
     depends_on:
       - nextcloud
-
-# DEFINICIÓN DE LOS NUEVOS VOLÚMENES
-volumes:
-  npm_data:
-  npm_letsencrypt:
-  ldap_var:
-  ldap_etc:
-  nextcloud_db:
-  nextcloud_data:
-
+# REDES
 networks:
   red-publica:
     driver: bridge
