@@ -1,5 +1,16 @@
 #!/bin/bash
 
+if [ "$1" == "--help" ]; then
+	echo "Funcionamiento del programa:"
+	echo "Se debe incluir 1 argumento:
+		numero de puerto abierto para la comunicacion"
+
+	exit 2
+elif [[ ! $1 =~ ^-?[0-9]+$ ]]; then
+    echo "Error: '$1' no es un número de puerto válido."
+    exit 2
+fi
+
 #  Carga las variables del archivo .env
 if [ -f .env ]; then
     export $(grep -v '^#' .env | xargs)
@@ -9,8 +20,9 @@ else
     exit 1
 fi
 
+
 #  Define el dominio (usando la variable de tu .env + el puerto)
-DOMINIO_COMPLETO="${MI_DOMINIO}:4443"
+DOMINIO_COMPLETO="${MI_DOMINIO}:$1"
 
 echo " Configurando Nextcloud para: $DOMINIO_COMPLETO"
 
