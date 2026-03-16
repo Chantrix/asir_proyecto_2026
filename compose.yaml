@@ -22,7 +22,8 @@ services:
       - npm_letsencrypt:/etc/letsencrypt
     networks:
       - red-publica
-      - red-privada
+      #comento esta linea porque no parece necesaria
+      #- red-privada 
 
   ldap:
     image: osixia/openldap:latest
