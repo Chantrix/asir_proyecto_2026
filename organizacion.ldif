@@ -1,0 +1,89 @@
+# --- Estructura de Unidades Organizativas (OU) ---
+
+dn: ou=People,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Groups,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+objectClass: organizationalUnit
+ou: Groups
+
+# --- Definición de Usuarios ---
+
+dn: uid=mlopez,ou=People,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: mlopez
+sn: Lopez
+uid: mlopez
+uidNumber: 2001
+gidNumber: 5001
+homeDirectory: /home/mlopez
+loginShell: /bin/bash
+userPassword: password123
+
+dn: uid=jperez,ou=People,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: jperez
+sn: Perez
+uid: jperez
+uidNumber: 2002
+gidNumber: 5002
+homeDirectory: /home/jperez
+loginShell: /bin/bash
+userPassword: password123
+
+dn: uid=agarcia,ou=People,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: agarcia
+sn: Garcia
+uid: agarcia
+uidNumber: 2003
+gidNumber: 5003
+homeDirectory: /home/agarcia
+loginShell: /bin/bash
+userPassword: password123
+
+dn: uid=srapallo,ou=People,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: srapallo
+sn: Rapallo
+uid: srapallo
+uidNumber: 2004
+gidNumber: 5000
+homeDirectory: /home/srapallo
+loginShell: /bin/bash
+userPassword: password123
+
+# --- Definición de Grupos y Membresías ---
+
+dn: cn=ventas,ou=Groups,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+objectClass: posixGroup
+cn: ventas
+gidNumber: 5001
+memberUid: mlopez
+
+dn: cn=marketing,ou=Groups,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+objectClass: posixGroup
+cn: marketing
+gidNumber: 5002
+memberUid: jperez
+
+dn: cn=rrhh,ou=Groups,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+objectClass: posixGroup
+cn: rrhh
+gidNumber: 5003
+memberUid: agarcia
+
+dn: cn=admin,ou=Groups,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+objectClass: posixGroup
+cn: admin
+gidNumber: 5000
+memberUid: srapallo
