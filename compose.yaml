@@ -92,7 +92,7 @@ services:
       - WAZUH_AGENT_NAME=Agente-SanRap  # Nombre que verás en el Dashboard
       - WAZUH_REGISTRATION_SERVER=single-node-wazuh.manager-1 
     volumes:
-      - nextcloud_data:/var/www/html/data:ro # Acceso directo al volumen de Nextcloud
+      - nextcloud_data:/var/www/html:ro # Acceso directo al volumen de Nextcloud
       # Mantenemos este como ruta relativa para que el agente lea el log local si existe
      # - ./nextcloud_data/data/nextcloud.log:/var/log/nextcloud/nextcloud.log:ro
       - /var/run/docker.sock:/var/run/docker.sock # Útil para monitorizar Docker
