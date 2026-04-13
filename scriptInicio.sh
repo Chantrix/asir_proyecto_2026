@@ -1,5 +1,7 @@
 #!/bin/bash
-
+#Este script es el "Configurador de Acceso Externo".
+#Su función es decirle a Nextcloud que acepte conexiones desde
+#internet a través de tu dominio de DuckDNS y tu puerto específico.
 if [ "$1" == "--help" ]; then
 	echo "Funcionamiento del programa:"
 	echo "Se debe incluir 1 argumento:
