@@ -5,6 +5,10 @@
 *.bak
 *.swp
 
+# --- DOCUMENTOS PRIVADOS (no publicar) ---
+docs/memoria-tfg.pdf
+docs/memoria-tfg.docx
+
 # --- DATOS DE DOCKER (No subir volúmenes) ---
 # No queremos subir los GB de archivos de Nextcloud ni la DB del LDAP
 nextcloud_data/
