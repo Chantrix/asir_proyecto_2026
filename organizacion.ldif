@@ -1,16 +1,16 @@
 # --- Estructura de Unidades Organizativas (OU) ---
 
-dn: ou=People,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+dn: ou=People,dc=<nombre_dc>,dc=<nombre_dc_2>,dc=duckdns,dc=org
 objectClass: organizationalUnit
 ou: People
 
-dn: ou=Groups,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+dn: ou=Groups,dc=<nombre_dc>,dc=<nombre_dc_2>,dc=duckdns,dc=org
 objectClass: organizationalUnit
 ou: Groups
 
 # --- Definición de Usuarios ---
 
-dn: uid=mlopez,ou=People,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+dn: uid=mlopez,ou=People,dc=<nombre_dc>,dc=<nombre_dc_2>,dc=duckdns,dc=org
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
@@ -21,9 +21,9 @@ uidNumber: 2001
 gidNumber: 5001
 homeDirectory: /home/mlopez
 loginShell: /bin/bash
-userPassword: password123
+userPassword: <contraseña-defecto>
 
-dn: uid=jperez,ou=People,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+dn: uid=jperez,ou=People,dc=<nombre_dc>,dc=<nombre_dc_2>,dc=duckdns,dc=org
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
@@ -34,9 +34,9 @@ uidNumber: 2002
 gidNumber: 5002
 homeDirectory: /home/jperez
 loginShell: /bin/bash
-userPassword: password123
+userPassword: <contraseña-defecto>
 
-dn: uid=agarcia,ou=People,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+dn: uid=agarcia,ou=People,dc=<nombre_dc>,dc=<nombre_dc_2>,dc=duckdns,dc=org
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
@@ -47,43 +47,43 @@ uidNumber: 2003
 gidNumber: 5003
 homeDirectory: /home/agarcia
 loginShell: /bin/bash
-userPassword: password123
+userPassword: <contraseña-defecto>
 
-dn: uid=srapallo,ou=People,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+dn: uid=<nombre-miembro>,ou=People,dc=<nombre_dc>,dc=<nombre_dc_2>,dc=duckdns,dc=org
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
-cn: srapallo
-sn: Rapallo
-uid: srapallo
+cn: <nombre-miembro>
+sn: <<Apellido>>
+uid: <nombre-miembro>
 uidNumber: 2004
 gidNumber: 5000
-homeDirectory: /home/srapallo
+homeDirectory: /home/<nombre-miembro>
 loginShell: /bin/bash
-userPassword: password123
+userPassword: <contraseña-defecto>
 
 # --- Definición de Grupos y Membresías ---
 
-dn: cn=ventas,ou=Groups,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+dn: cn=ventas,ou=Groups,dc=<nombre_dc>,dc=<nombre_dc_2>,dc=duckdns,dc=org
 objectClass: posixGroup
 cn: ventas
 gidNumber: 5001
 memberUid: mlopez
 
-dn: cn=marketing,ou=Groups,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+dn: cn=marketing,ou=Groups,dc=<nombre_dc>,dc=<nombre_dc_2>,dc=duckdns,dc=org
 objectClass: posixGroup
 cn: marketing
 gidNumber: 5002
 memberUid: jperez
 
-dn: cn=rrhh,ou=Groups,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+dn: cn=rrhh,ou=Groups,dc=<nombre_dc>,dc=<nombre_dc_2>,dc=duckdns,dc=org
 objectClass: posixGroup
 cn: rrhh
 gidNumber: 5003
 memberUid: agarcia
 
-dn: cn=admin,ou=Groups,dc=sanrap,dc=tfg-asir,dc=duckdns,dc=org
+dn: cn=admin,ou=Groups,dc=<nombre_dc>,dc=<nombre_dc_2>,dc=duckdns,dc=org
 objectClass: posixGroup
 cn: admin
 gidNumber: 5000
-memberUid: srapallo
+memberUid: <nombre-miembro>
