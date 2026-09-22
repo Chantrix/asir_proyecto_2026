@@ -1,8 +1,0 @@
-	tener un duckdns.
-	dirigir el trafico del router de 4443 al proxy
-	desplegar el compose
-	configurar el proxy en p :81 
-	para nextcloud usar el subdominio -> cloud en el proxy host
-	entrar en nextcloud crear admin y passwd instalar la bd
-	ejecutar el scriptInicio
-	

@@ -11,6 +11,7 @@ nextcloud_data/
 nextcloud_db/
 ldap_data/
 ldap_config/
+ldap/
 data/
 letsencrypt/
 mysql/
@@ -37,4 +38,3 @@ $RECYCLE.BIN/
 .idea/
 *.sublime-project
 *.sublime-workspace
-CLAUDE.md
